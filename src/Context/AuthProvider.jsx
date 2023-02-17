@@ -7,11 +7,9 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const createUser = async (name, email, password, photo) => {
+  const createUser = async (email, password) => {
     setLoading(true);
-    createUserWithEmailAndPassword(auth, email, password).then((user) => {
-      console.log(user);
-    });
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const name = "sukan";

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider";
 
 const SignIn = () => {
+  const { createUser } = useContext(AuthContext);
   let navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
+
+  // Handle Login
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;

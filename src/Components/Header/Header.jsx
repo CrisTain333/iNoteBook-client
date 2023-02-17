@@ -2,6 +2,10 @@ import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import brandLogo from "../../assets/post-it.png";
 const Header = () => {
+  const handleLogout = () => {
+    localStorage.removeItem("iNoteAuthToken");
+  };
+
   return (
     <div>
       <div className="navbar bg-base-100 ">
@@ -66,7 +70,7 @@ const Header = () => {
               className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <button>Logout</button>
+                <button onClick={handleLogout}>Logout</button>
               </li>
             </ul>
           </div>
