@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
-const PrivateRoute: any = ({ children }: any) => {
+const PrivateRoute = ({ children }) => {
   const location = useLocation();
   if (!localStorage.getItem("iNoteAuthToken")) {
     return <Navigate to="/sign-in" state={{ from: location }} replace />;
