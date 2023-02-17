@@ -1,10 +1,17 @@
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import brandLogo from "../../assets/post-it.png";
+import { AuthContext } from "../../Context/AuthProvider";
+import { getUser } from "../../helper/getUser";
 const Header = () => {
+  const { signOutUser, user } = useContext(AuthContext);
+
+  const userInfo = getUser(user?.email);
+  console.log(userInfo);
+
   return (
     <div>
-      <div className="navbar bg-base-100 ">
+      <div className="navbar bg-base-100 shadow-md">
         <div className="flex-none">
           <label
             className="btn btn-square btn-ghost lg:hidden"
@@ -66,7 +73,7 @@ const Header = () => {
               className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <button>Logout</button>
+                <button onClick={signOutUser}>Logout</button>
               </li>
             </ul>
           </div>

@@ -4,10 +4,10 @@ import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
 import "./note.css";
 
-const CreateNote = (props: any) => {
+const CreateNote = (props) => {
   const [isExpanded, setExpanded] = useState(false);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const title = form.title.value;
