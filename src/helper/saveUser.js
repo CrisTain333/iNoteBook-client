@@ -6,7 +6,7 @@ export const saveUser = (name, email, password, profilePicture) => {
     profilePicture,
   };
 
-  fetch("http://localhost:5000/user", {
+  fetch("http://localhost:8000/api/v1/auth/user", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -15,8 +15,8 @@ export const saveUser = (name, email, password, profilePicture) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      if (data.status === 200) {
-        const token = data.token;
+      if (data?.status === 200) {
+        const token = data?.data?.token;
         localStorage.setItem("iNoteAuthToken", token);
         const status = 200;
         return status;

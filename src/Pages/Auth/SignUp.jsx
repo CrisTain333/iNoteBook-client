@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import uploadImage from "..//../helper/uploadImage";
 import bradLogo from "../../assets/post-it.png";
 import { AuthContext } from "../../Context/AuthProvider";
@@ -7,6 +7,9 @@ import swal from "sweetalert";
 import { saveUser } from "../../helper/saveUser.js";
 
 const SignUp = () => {
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   const { createUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState();
@@ -26,12 +29,11 @@ const SignUp = () => {
     const profilePicture = e.target.profilePicture.files[0];
     const formData = new FormData();
     formData.append("image", profilePicture);
-    const imageUri = await uploadImage(profilePicture);
-    console.log(imageUri);
     createUser(email, password)
-      .then((UserCredential) => {
+      .then(async (UserCredential) => {
         console.log(UserCredential);
         if (UserCredential) {
+          const imageUri = await uploadImage(profilePicture);
           saveUser(name, email, password, imageUri.url);
           swal(`Welcome ${name}`, "Account Create Successful", "success");
           navigate(from, { replace: true });
@@ -116,7 +118,7 @@ const SignUp = () => {
                       <path d="M20 8v6M23 11h-6" />
                     </svg>
                     <span class="ml-3">
-                      {/* {loading ? (
+                      {loading ? (
                         <ThreeDots
                           height="20"
                           width="20"
@@ -127,9 +129,9 @@ const SignUp = () => {
                           wrapperClassName=""
                           visible={true}
                         />
-                      ) : ( */}
-                      "Sign Up"
-                      {/* )} */}
+                      ) : (
+                        "Sign Up"
+                      )}
                     </span>
                   </button>
                 </form>
