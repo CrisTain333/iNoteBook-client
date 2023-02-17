@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import brandLogo from "../../assets/post-it.png";
+import { AuthContext } from "../../Context/AuthProvider";
 const Header = () => {
-  const handleLogout = () => {
-    localStorage.removeItem("iNoteAuthToken");
-  };
+  const { signOutUser } = useContext(AuthContext);
 
   return (
     <div>
-      <div className="navbar bg-base-100 ">
+      <div className="navbar bg-base-100 shadow-md">
         <div className="flex-none">
           <label
             className="btn btn-square btn-ghost lg:hidden"
@@ -70,7 +69,7 @@ const Header = () => {
               className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <button onClick={handleLogout}>Logout</button>
+                <button onClick={signOutUser}>Logout</button>
               </li>
             </ul>
           </div>

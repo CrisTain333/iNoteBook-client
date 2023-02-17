@@ -1,38 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const SignIn = () => {
-  const { createUser } = useContext(AuthContext);
+  const { singInUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+
   let navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
-  // Handle Login
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const email = e.target.email.value;
     const password = e.target.password.value;
-    if (password.length < 6) {
-      return alert("Password Must Be >= 6");
-    }
-    const user = {
-      email,
-      password,
-    };
-    const res = await fetch("http://localhost:5000/api/v1/auth/login", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-    const result = await res.json();
-    alert(result.message);
-    if (result.status === 200) {
-      localStorage.setItem("iNoteAuthToken", result.data.token);
-      navigate(from, { replace: true });
-    }
+
+    singInUser(email, password)
+      .then((user) => {
+        setLoading(false);
+        swal("Grate", "Login Successful", "success");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        swal(errorCode, errorMessage, "error");
+        setLoading(false);
+      });
+    setLoading(false);
   };
   return (
     <div>
