@@ -3,7 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import brandLogo from "../../assets/post-it.png";
 import { AuthContext } from "../../Context/AuthProvider";
 const Header = () => {
-  const { signOutUser } = useContext(AuthContext);
+  const { signOutUser, user } = useContext(AuthContext);
 
   return (
     <div>
