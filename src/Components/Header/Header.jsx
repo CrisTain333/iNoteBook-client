@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import brandLogo from "../../assets/post-it.png";
 import { AuthContext } from "../../Context/AuthProvider";
 import { getUser } from "../../helper/getUser";
+import JoditEditor from 'jodit-react';
 const Header = () => {
   const { signOutUser, user } = useContext(AuthContext);
 

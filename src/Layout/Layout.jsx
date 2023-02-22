@@ -3,11 +3,13 @@ import { Link, Outlet } from "react-router-dom";
 import Header from "../Components/Header/Header";
 import noteLogo from "../assets/keeps.png";
 import todoLogo from "../assets/to-do-list.png";
+import addNoteIcon from "../assets/sticky-notes.png"
 
 const Layout = () => {
   const [selected, setSelected] = useState("My Notes");
   const sideContent = [
     { name: "My Notes", logo: noteLogo, link: "/" },
+    { name: "Add Notes", logo: addNoteIcon, link: "/add-notes" },
     { name: "To Do", logo: todoLogo, link: "/to-dos" },
   ];
 
@@ -27,24 +29,23 @@ const Layout = () => {
             {/* <!-- Sidebar content here --> */}
             {sideContent.map((e, i) => {
               return (
-                <li
-                  key={i}
-                  className={`rounded flex  justify-between ${
-                    selected === e.name
+                <Link to={e.link} className="font-bold">
+                  <li
+                    key={i}
+                    className={`rounded flex  justify-between ${selected === e.name
                       ? "bg-slate-100 text-black"
                       : " text-black"
-                  }`}
-                  onClick={() => setSelected(e.name)}
-                >
-                  <div>
-                    <span>
-                      <img src={e.logo} className="h-8" alt="itemLogo" />
-                    </span>
-                    <Link to={e.link} className="font-bold">
-                      {e.name}
-                    </Link>
-                  </div>
-                </li>
+                      }`}
+                    onClick={() => setSelected(e.name)}
+                  >
+                    <div>
+                      <span>
+                        <img src={e.logo} className="h-8" alt="itemLogo" />
+                      </span>
+                      <span>  {e.name}</span>
+                    </div>
+                  </li>
+                </Link>
               );
             })}
           </ul>
