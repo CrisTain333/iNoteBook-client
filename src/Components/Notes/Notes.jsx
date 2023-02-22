@@ -1,7 +1,11 @@
 import React from "react";
+import NoteCard from "../NoteCard/NoteCard";
 
 const Notes = () => {
-  return <div>Notes</div>;
+  return <div>
+    <NoteCard />
+
+  </div>;
 };
 
 export default Notes;

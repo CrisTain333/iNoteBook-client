@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import brandLogo from "../../assets/post-it.png";
 import { AuthContext } from "../../Context/AuthProvider";
@@ -11,7 +11,7 @@ const Header = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-100 shadow-md">
+      <div className="navbar bg-base-100 shadow-md ">
         <div className="flex-none">
           <label
             className="btn btn-square btn-ghost lg:hidden"
