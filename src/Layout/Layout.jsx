@@ -23,9 +23,9 @@ const Layout = () => {
 
           <Outlet />
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side sticky top-2">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 bg-base-100 text-base-content space-y-5">
+          <ul className="menu p-4 w-60 bg-base-100 text-base-content space-y-5 ">
             {/* <!-- Sidebar content here --> */}
             {sideContent.map((e, i) => {
               return (
