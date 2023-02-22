@@ -11,7 +11,7 @@ const Header = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-100 shadow-md">
+      <div className="navbar bg-base-100 shadow-md ">
         <div className="flex-none">
           <label
             className="btn btn-square btn-ghost lg:hidden"
