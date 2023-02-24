@@ -1,13 +1,15 @@
 import React from 'react';
 import getRelativeDateString from '../../helper/getRelativeTime';
 
-const date = new Date();
-// setInterval(() => {
-//     const time = getRelativeDateString(date);
-//     console.log(time);
-// }, 1000)
+// const date = new Date();
+// // setInterval(() => {
+// //     const time = getRelativeDateString(date);
+// //     console.log(time);
+// // }, 1000)
 
-const NoteCard = () => {
+const NoteCard = ({ note }) => {
+    console.log(note)
+    const { title, content, userEmail, userProfile } = note;
     return (
         <div>
             <div class="px-4 sm:px-6 lg:px-5">
@@ -18,17 +20,17 @@ const NoteCard = () => {
                         <div class="flex flex-shrink-0 rounded-full border border-gray-200">
                             <img
                                 class="w-8 h-8 object-cover rounded-full"
-                                src="review.photo"
+                                src={userProfile}
                                 alt=""
                             />
                         </div>
                     </div>
                     <div class="space-y-1 mt-3">
                         <h3 class="font-semibold text-gray-800">
-                            title
+                            {title}
                         </h3>
                         <p class="text-sm font-medium leading-5 text-gray-600">
-                            content
+                            {content}
                         </p>
                     </div>
 
