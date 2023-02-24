@@ -26,8 +26,9 @@ const CreateNote = () => {
     const content = form.content.value;
     const userEmail = userInfo?.data?.email;
     const userProfile = userInfo?.data?.profilePicture
+    const date = new Date()
     const note = {
-      title, content, userEmail, userProfile
+      title, content, userEmail, userProfile, date
     }
     fetch("http://localhost:8000/api/v1/note", {
       method: "POST",
@@ -68,4 +69,4 @@ const CreateNote = () => {
   );
 };
 
-export default CreateNote;
+export default CreateNote; 
