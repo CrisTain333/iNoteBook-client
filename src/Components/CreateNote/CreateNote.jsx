@@ -1,12 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
-import Fab from "@mui/material/Fab";
-import Zoom from "@mui/material/Zoom";
 import "./note.css";
 import { AuthContext } from "../../Context/AuthProvider";
 import { getUser } from "../../helper/getUser";
 import toast, { Toaster } from 'react-hot-toast';
-import { Audio } from 'react-loader-spinner'
+import SmallLoader from "../SmallLoader/SmallLoader";
 const CreateNote = () => {
   const [loading, setLoading] = useState(false)
   const [userInfo, setUserInfo] = useState("");
@@ -19,16 +16,16 @@ const CreateNote = () => {
     }
     getUserInfo()
   }, [user])
-  console.log(userInfo)
-
+  console.log(userInfo);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     const form = e.target;
     const title = form.title.value;
     const content = form.content.value;
-    const userEmail = userInfo?.email;
-    const userProfile = userInfo?.profilePicture
+    const userEmail = userInfo?.data?.email;
+    const userProfile = userInfo?.data?.profilePicture
     const note = {
       title, content, userEmail, userProfile
     }
@@ -43,10 +40,11 @@ const CreateNote = () => {
       .then(message => {
         if (message.status === 200) {
           toast.success('Notes Saved');
+          setLoading(false)
         }
 
       })
-
+    setLoading(false)
     form.reset()
 
   };
@@ -55,15 +53,16 @@ const CreateNote = () => {
     <div className="w-[90%] lg:w-3/4 mx-auto">
       <Toaster></Toaster>
       <form className="create-note relative" onSubmit={handleSubmit}>
-        <input name="title" placeholder="Title" />
+        <input name="title" placeholder="Title" required />
         <textarea
+          required
           name="content"
           className="mt-3"
           placeholder="Take a note..."
           rows={5}
         />
 
-        <button className="bg-[#f5ba13] text-white px-3 py-2 rounded" type="submit">Add Note</button>
+        <button className={`bg-[#f5ba13] text-white px-3 py-2 rounded ${loading && "cursor-not-allowed"}`} type="submit">{loading ? <SmallLoader /> : `Add Note`}</button>
       </form>
     </div>
   );
