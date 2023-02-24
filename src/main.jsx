@@ -4,9 +4,6 @@ import App from "./App";
 import AuthProvider from "./Context/AuthProvider";
 import "./index.css";
 import {
-  useQuery,
-  useMutation,
-  useQueryClient,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
