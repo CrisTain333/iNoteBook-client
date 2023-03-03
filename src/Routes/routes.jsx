@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import SingleNote from "../Components/SingleNote/SingleNote";
 import Layout from "../Layout/Layout";
 import AddNote from "../Pages/AddNote/AddNote";
 import SignIn from "../Pages/Auth/SignIn";
@@ -32,6 +33,15 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/note/:id",
+        loader: async ({ params }) => {
+          return (
+            fetch(`http://localhost:8000/api/v1/note/single/${params.id}`)
+          )
+        },
+        element: <SingleNote />
+      }
     ],
   },
   {
