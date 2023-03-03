@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import getRelativeDateString from "../../helper/getRelativeTime";
+import "./noteCard.css"
 
 // const date = new Date();
 // // setInterval(() => {
@@ -8,18 +10,49 @@ import getRelativeDateString from "../../helper/getRelativeTime";
 // // }, 1000)
 
 const NoteCard = ({ note }) => {
-    const { title, content, userProfile, date } = note;
+    const { title, content, userProfile, date, _id } = note;
     return (
-        <div className="shadow-md mx-10 bg-white rounded">
-            <div className="w-full">
-                {/* profile div  */}
-                <div className="profile_Image">
-                    <img src={userProfile} className="h-10 w-10" alt="" />
+        <Link to={`/notes/${_id}`
+        }>
+            <div className="shadow-md mx-10 bg-white rounded hover:scale-105 transition-all cur duration-300">
 
+                {/* Main Div  */}
+                <div className="w-full">
+                    {/* main Content  */}
+                    <div className="p-3">
+                        <div className="main_title">
+                            <h2 className="text-xl font-semibold">{title}</h2>
+                        </div>
+
+                        <div className="mt-5">
+                            <div className="content">
+                                <p>{content?.slice(0, 40)} <br />{content?.slice(40, 80)}  ....</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Footer Div  */}
+                    <div className="flex items-center justify-between">
+                        {/* profile div  */}
+                        {/* <div className="profile_Image_div my-2 p-2">
+                        <label className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full  ring ring-[#f5ba13] ring-offset-base-100 ring-offset-2">
+                                <img src={userProfile} />
+                            </div>
+                        </label>
+
+                    </div> */}
+
+                        {/* time Div  */}
+                        <div className="added-time">
+                            <div className="p-2 font-medium">
+                                <p>{getRelativeDateString(date)}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-        </div>
+        </Link>
     );
 };
 

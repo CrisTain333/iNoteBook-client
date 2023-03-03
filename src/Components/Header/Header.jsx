@@ -1,17 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import brandLogo from "../../assets/post-it.png";
 import { AuthContext } from "../../Context/AuthProvider";
 import { getUser } from "../../helper/getUser";
 const Header = () => {
   const { signOutUser, user } = useContext(AuthContext);
-
-  const userInfo = getUser(user?.email);
-  console.log(userInfo);
+  const [userInfo, setUserInfo] = useState("");
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const userInformation = await getUser(user.email);
+      setUserInfo(userInformation);
+    }
+    getUserInfo()
+  }, [user])
+  console.log(userInfo)
 
   return (
     <div>
-      <div className="navbar bg-base-100 shadow-md ">
+      <div className="navbar bg-base-100 shadow-md">
         <div className="flex-none">
           <label
             className="btn btn-square btn-ghost lg:hidden"
@@ -65,7 +71,7 @@ const Header = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full  ring ring-[#f5ba13] ring-offset-base-100 ring-offset-2">
-                <img src="https://i.ibb.co/bd90CTC/rsz-profile-pic-1.png" />
+                <img src={userInfo?.data?.profilePicture} />
               </div>
             </label>
             <ul
