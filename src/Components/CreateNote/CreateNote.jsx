@@ -51,7 +51,7 @@ const CreateNote = () => {
   };
 
   return (
-    <div className="w-[90%] lg:w-3/4 mx-auto">
+    <div className="w-[90%] lg:w-3/4 mx-auto ">
       <Toaster></Toaster>
       <form className="create-note relative" onSubmit={handleSubmit}>
         <input name="title" placeholder="Title" required />

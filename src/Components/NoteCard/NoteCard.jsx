@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import getRelativeDateString from "../../helper/getRelativeTime";
+import "./noteCard.css"
 
 // const date = new Date();
 // // setInterval(() => {
@@ -8,39 +10,49 @@ import getRelativeDateString from "../../helper/getRelativeTime";
 // // }, 1000)
 
 const NoteCard = ({ note }) => {
-    console.log(note);
-    const { title, content, userProfile, date } = note;
+    const { title, content, userProfile, date, _id } = note;
     return (
-        <div>
-            <div class="px-4 sm:px-6 lg:px-5">
-                <div class="w-full px-8 py-8 rounded-md shadow-lg bg-white">
-                    <div class=" flex items-center space-x-2">
-                        <div class="flex flex-shrink-0 rounded-full border border-gray-200">
-                            <img
-                                class="w-8 h-8 object-cover rounded-full"
-                                src={userProfile}
-                                alt=""
-                            />
+        <Link to={`/note/${_id}`
+        }>
+            <div className="shadow-md mx-10 bg-white rounded hover:scale-105 transition-all cur duration-300">
+
+                {/* Main Div  */}
+                <div className="w-full">
+                    {/* main Content  */}
+                    <div className="p-3">
+                        <div className="main_title">
+                            <h2 className="text-xl font-semibold">{title}</h2>
+                        </div>
+
+                        <div className="mt-5">
+                            <div className="content">
+                                <p>{content?.slice(0, 40)} ....</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="space-y-1 mt-3 h-24">
-                        <h3 class="font-semibold text-gray-800">{title}</h3>
-                        <p class="text-sm font-medium leading-5text-gray-600 h-24">
-                            {content}
-                        </p>
-                    </div>
 
-                    <div class="mt-2 flex items-center space-x-2 justify-between ">
-                        <button className="bg-[#fcc631] text-white px-3 py-1 rounded transition-all duration-500 hover:scale-110">
-                            View
-                        </button>
-                        <span class="text-sm font-semibold leading-5 text-gray-900">
-                            {getRelativeDateString(date)}
-                        </span>
+                    {/* Footer Div  */}
+                    <div className="flex flex-col ">
+                        {/* profile div  */}
+                        {/* <div className="profile_Image_div  p-2">
+                            <label className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full  ring ring-[#f5ba13] ring-offset-base-100 ring-offset-2">
+                                    <img src={userProfile} />
+                                </div>
+                            </label>
+
+                        </div> */}
+
+                        {/* time Div  */}
+                        <div className="added-time">
+                            <div className="p-2 font-medium">
+                                <p>{getRelativeDateString(date)}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
